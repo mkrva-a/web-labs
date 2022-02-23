@@ -1,0 +1,64 @@
+{% extends "app/layout.html" %}
+{% block content %}
+{% if form != None %}
+    <br />
+    <h2>Отправьте пожалуйста заполненный отзыв</h2>
+    <br />
+    <div>
+        <form method="post">
+            {% csrf_token %}
+            <label for="{{form.name.id_for_label}}">{{form.name.label}}:</label>
+            {{form.name}}<br /><br />
+            <label for="{{form.animal.id_for_label}}">{{form.animal.label}}:</label>
+            {{form.animal}}<br /><br />
+            <label for="{{form.products.id_for_label}}">{{form.products.label}}:</label>
+            {{form.products}}<br /><br />
+            <label for="{{form.notice.id_for_label}}">{{form.notice.label}}:</label>
+            {{form.notice}}<br /><br />
+            <label for="{{form.email.id_for_label}}">{{form.email.label}}:</label>
+            {{form.email}}<br /><br />
+            <label for="{{form.message.id_for_label}}">{{form.message.label}}:</label>
+            {{form.message}}<br /><br />
+            <input type="submit" value="Отправить" id="ex" style="background-color:azure">
+        </form>
+    </div>
+
+    <script>
+        ex.onmouseover = function () {
+            ex.style.background = "cornflowerblue";
+        }
+
+        ex.onmouseleave = function () {
+            ex.style.background = "azure";
+        };
+
+        id_name.addEventListener('keydown', function () {
+            this.style.backgroundColor = 'azure';
+        })
+
+        id_email.addEventListener('keydown', function () {
+            this.style.backgroundColor = 'azure';
+        })
+
+        id_message.addEventListener('keydown', function () {
+            this.style.backgroundColor = 'azure';
+        })
+    </script>
+{% else %}
+    <br />
+    <h2>Благодарим за предоставленную информацию!</h2>
+    <h3>Вы указали в отзыве следующее:</h3>
+    <ul>
+        <li><span>Имя:</span>{{data.name}}</li>
+        <li><span>Есть ли животное:</span>{{data.animal}}</li>
+        <li><span>Самый часто покупаемый вами товар:</span>{{data.products}}</li>
+        <li>
+            <span>Получать новости сайта на e-mail:</span>
+            {{data.notice}}
+        </li>
+        <li><span>Ваш e-mail:</span>{{data.email}}</li>
+        <li><span>Отзыв о сайте:</span>{{data.message}}</li>
+    </ul>
+{% endif %}
+{% endblock %}
+
